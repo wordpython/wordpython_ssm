@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+	http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- 加载属性文件 -->
+	<context:property-placeholder location="classpath:resource.properties"/>
+	
+	<!-- 定义组件扫描器，指定需要扫描的包 -->
+	<context:component-scan base-package="com.wordpython.controller" />
+	
+	<!-- 配置注解驱动 -->
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />
+    <!-- 以.html为后缀名访问，默认返回数据类型是 text/html， 所以要修改返回的数据类型 -->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean"> 
+        <property name="mediaTypes">  
+            <map>  
+                <entry key="html" value="application/json;charset=UTF-8"/> 
+            </map>  
+        </property> 
+    </bean>
+	
+	<!-- 配置文件上传解析器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设置请求编码格式 -->
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+	
+	<!-- 定义视图解析器,简化在controller类编写的视图路径 -->
+	<bean id="viewResolver" class="
+	org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 设置前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<!-- 设置后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<!-- 配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截 -->
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/fonts/" mapping="/fonts/**"/>
+	<mvc:resources location="/images/" mapping="/images/**"/>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.wordpython.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+</beans>

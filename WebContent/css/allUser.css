@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+#body {
+	width: 50%;
+	padding-top: 50px;
+	margin: 0 auto;
+}
+
+#kbtable {
+	font-size: 4px;
+}
+
+#kbtable1 {
+	float: left;
+}
+
+.Nsb_r_list.Nsb_table tbody tr td {
+	height: 25px;
+	width: 50px;
+	text-align: center;
+}
+
+#div_input {
+	float: right;
+	font-size: 18px;
+}
+
+#div_table {
+	padding-top: 10px;
+}
+
+.input1 {
+	width: 60px;
+	height: 20px;
+}
+
+input {
+	height: 27px;
+	width: 60px;
+}
+
+.title h2 {
+	text-align: center;
+}
+
+#find {
+	text-align: center;
+}
+
+#find input {
+	height: 27px;
+	width: 120px;
+	text-align: center;
+	font-size: 16px;
+}
+
+#find button {
+	height: 33px;
+	width: 60px;
+}
+
+#find a {
+	margin-right: 120px;
+	margin-left: -80px;
+	font-size: 18px;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace指定映射的包下的接口 -->
+<mapper namespace="com.wordpython.dao.LoginDao">
+	<select id="selectUser" parameterType="User" resultType="User">
+		select * from users where username=#{username} and password=#{password}
+	</select>
+	<select id="selectByUsername" parameterType="String" resultType="User">
+		select * from users where username=#{username}
+	</select>
+	<select id="selectPartUser" parameterType="User" resultType="Users">
+		<!-- select * from users limit 5,10  检索记录行 6-15 -->
+		select * from users
+		<if test="start !=null and rows !=null">
+			limit #{start},#{rows}
+		</if> 
+	</select>
+	<select id="selectUserCount" parameterType="Integer" resultType="Integer">
+		select count(*) from users
+	</select>
+	<insert id="insertUser" parameterType="User">
+		insert into users(account,username,password,phone) values(#{account},#{username},#{password},#{phone})
+	</insert>
+	
+</mapper>
