@@ -7,6 +7,6 @@
 <title>首页</title>
 </head>
 <body>
-默认首页
+默认首页.
 </body>
 </html>
